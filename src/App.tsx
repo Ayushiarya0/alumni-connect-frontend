@@ -21,13 +21,22 @@ import { AlumniDetailModal } from './components/explore/AlumniDetailModal';
 import { MentorshipModal } from './components/mentorship/MentorshipModal';
 import { GetTheAppModal } from './components/common/GetTheAppModal';
 import { AIChatbotWidget } from './components/ai/AIChatbotWidget';
+import { AIResumeAnalyserModal } from './components/ai/AIResumeAnalyserModal';
 import { ToastContainer } from './components/common/ToastContainer';
 import { IntroSequence } from './components/intro/IntroSequence';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 const MainAppContent: React.FC = () => {
-  const { currentView } = useApp();
+  const {
+    currentView,
+    isResumeAnalyserOpen,
+    setIsResumeAnalyserOpen,
+    resumeTargetRole,
+    sendMessage,
+    activeChatRecipientId,
+    addToast
+  } = useApp();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F9FA] dark:bg-[#090D16] text-[#0F172A] dark:text-[#F8FAFC] relative pb-20 sm:pb-24 transition-colors duration-300">
@@ -79,6 +88,17 @@ const MainAppContent: React.FC = () => {
       <AlumniDetailModal />
       <MentorshipModal />
       <GetTheAppModal />
+      <AIResumeAnalyserModal
+        isOpen={isResumeAnalyserOpen}
+        onClose={() => setIsResumeAnalyserOpen(false)}
+        initialRole={resumeTargetRole}
+        onSendFeedbackToChat={(summary) => {
+          if (activeChatRecipientId) {
+            sendMessage(activeChatRecipientId, summary);
+            addToast('Resume analysis summary posted to mentorship chat!', 'success');
+          }
+        }}
+      />
 
       {/* Toast Notification Container */}
       <ToastContainer />

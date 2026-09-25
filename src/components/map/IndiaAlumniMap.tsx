@@ -23,11 +23,13 @@ import {
   TrendingUp,
   Award,
   Clock,
-  ExternalLink
+  ExternalLink,
+  BookOpen
 } from 'lucide-react';
 import { UNIVERSITIES, ALUMNI_EVENTS, CAREER_OPPORTUNITIES } from '../../data/mockData';
 import { AlumniProfile } from '../../types';
 import { BackButton } from '../common/BackButton';
+import { IndiaCourseNetworkMap } from './IndiaCourseNetworkMap';
 
 interface CityHub {
   id: string;
@@ -50,7 +52,7 @@ const CITY_HUBS: CityHub[] = [
   { id: 'kolkata', name: 'Kolkata', state: 'West Bengal', coordinates: [22.5726, 88.3639], xPercent: 78, yPercent: 48 }
 ];
 
-type NetworkTab = 'map' | 'industry' | 'grad_year' | 'recommended' | 'events';
+type NetworkTab = 'map' | 'courses' | 'industry' | 'grad_year' | 'recommended' | 'events';
 
 export const IndiaAlumniMap: React.FC = () => {
   const {
@@ -261,6 +263,18 @@ export const IndiaAlumniMap: React.FC = () => {
           </button>
 
           <button
+            onClick={() => setActiveTab('courses')}
+            className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+              activeTab === 'courses'
+                ? 'bg-blue-600 text-white shadow-2xs'
+                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Course & Degree Network</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('industry')}
             className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
               activeTab === 'industry'
@@ -311,7 +325,27 @@ export const IndiaAlumniMap: React.FC = () => {
 
         {/* TAB 1: INTERACTIVE MAP & CITY HUBS */}
         {activeTab === 'map' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="space-y-6">
+            <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-slate-900 text-white p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-white/20 shrink-0">
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-xs sm:text-sm">Find Alumni Connected Across India by Course & Degree</h4>
+                  <p className="text-[11px] text-blue-100">Explore engineering, AI, Civil, PM & Design courses offered across Indian campuses with verified alumni mentors.</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setActiveTab('courses')}
+                className="px-4 py-2 rounded-xl bg-white text-blue-800 hover:bg-blue-50 font-bold text-xs transition-all cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5"
+              >
+                <span>Explore Course Map</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Interactive Schematic Map Container */}
             <div className="lg:col-span-7 bg-slate-900 rounded-3xl p-6 relative min-h-[460px] overflow-hidden border border-slate-800 shadow-xl flex flex-col justify-between">
               {/* Background Geographic Mesh */}
@@ -444,6 +478,14 @@ export const IndiaAlumniMap: React.FC = () => {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+        )}
+
+        {/* TAB: INTERACTIVE PAN-INDIA COURSE & DEGREE MAP */}
+        {activeTab === 'courses' && (
+          <div className="space-y-6">
+            <IndiaCourseNetworkMap />
           </div>
         )}
 

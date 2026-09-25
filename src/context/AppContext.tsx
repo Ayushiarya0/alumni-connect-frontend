@@ -146,6 +146,12 @@ interface AppContextType {
   getTheAppModalOpen: boolean;
   setGetTheAppModalOpen: (open: boolean) => void;
   GOOGLE_PLAY_STORE_APP_URL: string;
+  // AI Resume Analyser Modal
+  isResumeAnalyserOpen: boolean;
+  setIsResumeAnalyserOpen: (open: boolean) => void;
+  resumeTargetRole: string;
+  setResumeTargetRole: (role: string) => void;
+  openResumeAnalyser: (targetRole?: string) => void;
   // Profile Detail & Mentorship Modals
   selectedAlumni: AlumniProfile | null;
   setSelectedAlumni: (alumni: AlumniProfile | null) => void;
@@ -670,6 +676,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [pendingEmailForOtp, setPendingEmailForOtp] = useState('');
   const [getTheAppModalOpen, setGetTheAppModalOpen] = useState(false);
   const GOOGLE_PLAY_STORE_APP_URL = 'https://play.google.com/store/apps/details?id=com.alumniconnect.app';
+
+  // AI Resume Analyser Modal State
+  const [isResumeAnalyserOpen, setIsResumeAnalyserOpen] = useState(false);
+  const [resumeTargetRole, setResumeTargetRole] = useState('Software Development Engineer');
+
+  const openResumeAnalyser = (targetRole?: string) => {
+    if (targetRole) setResumeTargetRole(targetRole);
+    setIsResumeAnalyserOpen(true);
+  };
 
   const [selectedAlumni, setSelectedAlumni] = useState<AlumniProfile | null>(null);
   const [mentorshipTarget, setMentorshipTarget] = useState<AlumniProfile | null>(null);
@@ -2114,6 +2129,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         getTheAppModalOpen,
         setGetTheAppModalOpen,
         GOOGLE_PLAY_STORE_APP_URL,
+        // AI Resume Analyser Modal
+        isResumeAnalyserOpen,
+        setIsResumeAnalyserOpen,
+        resumeTargetRole,
+        setResumeTargetRole,
+        openResumeAnalyser,
         selectedAlumni,
         setSelectedAlumni,
         mentorshipTarget,

@@ -41,6 +41,7 @@ import { InteractiveTiltCard } from '../common/InteractiveTiltCard';
 import { AnimatedCounter } from '../common/AnimatedCounter';
 import { AnimatedWorkflowPipeline } from '../common/AnimatedWorkflowPipeline';
 import { AmbientMeshBg } from '../common/AmbientMeshBg';
+import { IndiaCourseNetworkMap } from '../map/IndiaCourseNetworkMap';
 
 export const LandingPage: React.FC = () => {
   const {
@@ -1035,6 +1036,11 @@ export const LandingPage: React.FC = () => {
                 </div>
               </InteractiveTiltCard>
             ))}
+          </div>
+
+          {/* Pan-India Course & Alumni Connection Map Section */}
+          <div className="mt-14 pt-10 border-t border-slate-200/80 dark:border-slate-800">
+            <IndiaCourseNetworkMap />
           </div>
         </div>
       </section>
