@@ -10,6 +10,7 @@
     --navbar-text: #334155;
     --primary: 168 85 247;
     --emerald: 16 185 129;
+    --animation-duration: 0.28s;
   }
 
   .dark {
@@ -24,7 +25,9 @@
   }
 }
 
-/* Glassmorphism helpers */
+/* ────────────────────────────────────────────────────────────
+   GLASSMORPHISM HELPERS
+──────────────────────────────────────────────────────────── */
 .glass-obsidian {
   background: rgba(14, 16, 23, 0.75);
   backdrop-filter: blur(16px);
@@ -47,7 +50,9 @@
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
 }
 
-/* Custom yellow ring / brush underline for hero */
+/* ────────────────────────────────────────────────────────────
+   HERO UNDERLINE
+──────────────────────────────────────────────────────────── */
 .yellow-brush-underline {
   position: relative;
   display: inline-block;
@@ -67,7 +72,9 @@
   z-index: 0;
 }
 
-/* Smooth custom scrollbar */
+/* ────────────────────────────────────────────────────────────
+   SCROLLBAR
+──────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -86,14 +93,12 @@
   background: #94a3b8;
 }
 
-/* Shimmer animation for skeleton loaders */
+/* ────────────────────────────────────────────────────────────
+   SKELETON SHIMMER
+──────────────────────────────────────────────────────────── */
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .skeleton-shimmer {
@@ -102,46 +107,354 @@
   animation: shimmer 1.5s infinite;
 }
 
-/* Interactive Card Elevation & Micro-transitions */
+.dark .skeleton-shimmer {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ────────────────────────────────────────────────────────────
+   INTERACTIVE CARD ELEVATION
+──────────────────────────────────────────────────────────── */
 .interactive-card {
-  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.24s ease;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.24s ease;
 }
 
 .interactive-card:hover {
   transform: translateY(-4px);
 }
 
-/* Subtle button press micro-interaction */
+/* ────────────────────────────────────────────────────────────
+   BUTTON MICRO-INTERACTIONS
+──────────────────────────────────────────────────────────── */
 .btn-press {
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.15s ease;
 }
 
 .btn-press:active {
   transform: scale(0.96);
 }
 
-/* Smooth page fade transition helper */
+/* ────────────────────────────────────────────────────────────
+   PAGE TRANSITIONS
+──────────────────────────────────────────────────────────── */
 .page-transition {
   animation: pageEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Hide scrollbar helper */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* ────────────────────────────────────────────────────────────
+   SCROLL REVEAL — used by useScrollReveal hook
+──────────────────────────────────────────────────────────── */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.reveal-hidden.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-hidden-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hidden-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-hidden-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hidden-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delay helpers */
+.reveal-delay-1 { transition-delay: 0.05s !important; }
+.reveal-delay-2 { transition-delay: 0.10s !important; }
+.reveal-delay-3 { transition-delay: 0.15s !important; }
+.reveal-delay-4 { transition-delay: 0.20s !important; }
+.reveal-delay-5 { transition-delay: 0.25s !important; }
+.reveal-delay-6 { transition-delay: 0.30s !important; }
+
+/* ────────────────────────────────────────────────────────────
+   MODAL SLIDE-UP (bottom sheet on mobile)
+──────────────────────────────────────────────────────────── */
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-slide-up {
+  animation: modalSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   ANIMATED COUNTER (number roll)
+──────────────────────────────────────────────────────────── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.counter-animate {
+  animation: countUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   DASHBOARD LOADING ANIMATION
+──────────────────────────────────────────────────────────── */
+@keyframes dashboardFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-section {
+  opacity: 0;
+  animation: dashboardFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dashboard-section:nth-child(1) { animation-delay: 0.05s; }
+.dashboard-section:nth-child(2) { animation-delay: 0.10s; }
+.dashboard-section:nth-child(3) { animation-delay: 0.15s; }
+.dashboard-section:nth-child(4) { animation-delay: 0.20s; }
+.dashboard-section:nth-child(5) { animation-delay: 0.25s; }
+.dashboard-section:nth-child(6) { animation-delay: 0.30s; }
+
+/* ────────────────────────────────────────────────────────────
+   PROFILE CARD EXPANSION / HOVER
+──────────────────────────────────────────────────────────── */
+.profile-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+  will-change: transform;
+}
+
+.profile-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
+}
+
+/* ────────────────────────────────────────────────────────────
+   SEARCH RESULT ANIMATION
+──────────────────────────────────────────────────────────── */
+@keyframes searchResultIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.search-result-item {
+  animation: searchResultIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.search-result-item:nth-child(1) { animation-delay: 0.00s; }
+.search-result-item:nth-child(2) { animation-delay: 0.04s; }
+.search-result-item:nth-child(3) { animation-delay: 0.08s; }
+.search-result-item:nth-child(4) { animation-delay: 0.12s; }
+.search-result-item:nth-child(5) { animation-delay: 0.16s; }
+.search-result-item:nth-child(6) { animation-delay: 0.20s; }
+
+/* ────────────────────────────────────────────────────────────
+   TAB TRANSITIONS
+──────────────────────────────────────────────────────────── */
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.tab-panel {
+  animation: tabFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   SUBTLE PARALLAX SCROLL HINT
+──────────────────────────────────────────────────────────── */
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* ────────────────────────────────────────────────────────────
+   SMOOTH CAROUSEL TRANSITIONS
+──────────────────────────────────────────────────────────── */
+@keyframes carouselSlideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.carousel-slide {
+  animation: carouselSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   CONNECT ANIMATION (connection request pulse)
+──────────────────────────────────────────────────────────── */
+@keyframes connectPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.connect-pulse {
+  animation: connectPulse 0.7s ease-out;
+}
+
+/* ────────────────────────────────────────────────────────────
+   NAVIGATION TRANSITION
+──────────────────────────────────────────────────────────── */
+@keyframes navItemIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-item-animate {
+  animation: navItemIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   HIDE SCROLLBAR HELPER
+──────────────────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
+/* ────────────────────────────────────────────────────────────
+   ROLE TRANSITION (Student → Alumni → Mentor)
+──────────────────────────────────────────────────────────── */
+@keyframes roleTransitionIn {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.role-transition {
+  animation: roleTransitionIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   AVATAR GRID ITEM HOVER
+──────────────────────────────────────────────────────────── */
+.avatar-grid-item {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.avatar-grid-item:hover {
+  transform: scale(1.06);
+}
+
+/* ────────────────────────────────────────────────────────────
+   FLOATING ACTION BUTTON BOUNCE
+──────────────────────────────────────────────────────────── */
+@keyframes fabBounce {
+  0%  { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  70% { transform: scale(0.96); }
+  100%{ transform: scale(1); }
+}
+
+.fab-bounce:active {
+  animation: fabBounce 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ────────────────────────────────────────────────────────────
+   STAT CARD (dashboard counters)
+──────────────────────────────────────────────────────────── */
+@keyframes statCardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.stat-card {
+  animation: statCardIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   TOAST NOTIFICATION ENTRANCE
+──────────────────────────────────────────────────────────── */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(100%) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to   { opacity: 0; transform: translateX(100%) scale(0.9); }
+}
+
+.toast-enter {
+  animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toast-exit {
+  animation: toastOut 0.3s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   EDUCATIONAL ROLE TRANSITION BADGE
+──────────────────────────────────────────────────────────── */
+@keyframes badgePop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.badge-pop {
+  animation: badgePop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   IMAGE SLIDE TRANSITION
+──────────────────────────────────────────────────────────── */
+@keyframes imageSlideIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.image-slide-in {
+  animation: imageSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   SECTION ENTRANCE
+──────────────────────────────────────────────────────────── */
+@keyframes sectionEntrance {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-entrance {
+  animation: sectionEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ────────────────────────────────────────────────────────────
+   SMOOTH FOCUS RING
+──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #2563EB;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

@@ -8,6 +8,7 @@ import { IndiaAlumniMap } from './components/map/IndiaAlumniMap';
 import { MentorshipHub } from './components/mentorship/MentorshipHub';
 import { StudentDashboard } from './components/dashboard/StudentDashboard';
 import { AlumniDashboard } from './components/dashboard/AlumniDashboard';
+import { TeacherDashboard } from './components/dashboard/TeacherDashboard';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { PersonalProfileView } from './components/profile/PersonalProfileView';
 import { ChatSystem } from './components/chat/ChatSystem';
@@ -54,6 +55,7 @@ const MainAppContent: React.FC = () => {
             {currentView === 'achievements' && <AchievementsPage />}
             {currentView === 'student-dashboard' && <StudentDashboard />}
             {currentView === 'alumni-dashboard' && <AlumniDashboard />}
+            {currentView === 'teacher-dashboard' && <TeacherDashboard />}
             {currentView === 'admin-dashboard' && <AdminDashboard />}
             {currentView === 'my-profile' && <PersonalProfileView />}
             {currentView === 'chat' && <ChatSystem />}

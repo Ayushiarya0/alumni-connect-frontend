@@ -17,6 +17,8 @@ import { AlumniProfile } from '../../types';
 import { BackButton } from '../common/BackButton';
 import { motion } from 'framer-motion';
 
+import { AIMentorSearch } from '../ai/AIMentorSearch';
+
 const MENTOR_FILTERS = [
   { label: 'All Mentors', value: 'all' },
   { label: 'Career', value: 'career' },
@@ -41,6 +43,7 @@ export const MentorshipHub: React.FC = () => {
     triggerAuthGate
   } = useApp();
 
+  const [searchMode, setSearchMode] = useState<'ai' | 'normal'>('ai');
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -128,8 +131,45 @@ export const MentorshipHub: React.FC = () => {
           </div>
         </div>
 
-        {/* Search & 8 Category Filters (Requirement 7) */}
-        <div className="space-y-4">
+        {/* Search Mode Toggle (Requirement 11: Normal Search + AI Search) */}
+        <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl max-w-md">
+          <button
+            type="button"
+            onClick={() => setSearchMode('ai')}
+            className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              searchMode === 'ai'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>AI Mentor Search</span>
+            <span className={`px-1.5 py-0.5 rounded text-[9px] uppercase font-black ${
+              searchMode === 'ai' ? 'bg-white/20 text-white' : 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+            }`}>
+              AI RECOMMENDED
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setSearchMode('normal')}
+            className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              searchMode === 'normal'
+                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Search className="w-3.5 h-3.5" />
+            <span>Normal Directory</span>
+          </button>
+        </div>
+
+        {searchMode === 'ai' ? (
+          <AIMentorSearch />
+        ) : (
+          <>
+            {/* Search & 8 Category Filters (Requirement 7) */}
+            <div className="space-y-4">
           {/* Search Box */}
           <div className="relative max-w-xl">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -324,6 +364,8 @@ export const MentorshipHub: React.FC = () => {
             })}
           </div>
         )}
+      </>
+    )}
 
       </div>
     </div>

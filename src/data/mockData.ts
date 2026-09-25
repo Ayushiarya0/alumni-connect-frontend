@@ -1,6 +1,7 @@
 import {
   University,
   AlumniProfile,
+  TeacherProfile,
   StudentProfile,
   ConnectionRequest,
   MentorshipRequest,
@@ -862,6 +863,72 @@ export const ALUMNI_LIST: AlumniProfile[] = [
   }
 ];
 
+export const TEACHERS_LIST: TeacherProfile[] = [
+  {
+    id: 'teacher-sunita-sen',
+    name: 'Dr. Sunita Sen',
+    email: 'sunita.sen@iitr.ac.in',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
+    university: 'Indian Institute of Technology Roorkee',
+    universityId: 'iit-roorkee',
+    department: 'Department of Computer Science & Engineering',
+    designation: 'Professor & Head of AI Laboratory',
+    experienceYears: 14,
+    skills: ['Machine Learning', 'Python', 'Deep Learning', 'PyTorch', 'Data Science', 'Statistics', 'NLP'],
+    expertise: ['Machine Learning', 'Deep Neural Networks', 'Computer Vision', 'Applied Statistics'],
+    subjectsCanTeach: ['Machine Learning', 'Python', 'Data Science', 'Deep Learning', 'Statistics for AI'],
+    mentorshipTopics: ['Machine Learning Foundations', 'Python for Data Science', 'Research Project Guidance', 'Career in AI'],
+    officeHours: 'Mon & Thu 3:00 PM - 5:30 PM IST',
+    bio: 'Professor of AI at IIT Roorkee with 14+ years of academic research and industry consulting. Passionate about empowering students in machine learning algorithms, deep learning models, and real-world applied AI.',
+    location: 'Roorkee, Uttarakhand',
+    verificationStatus: 'verified',
+    availableForMentorship: true,
+    registrationDate: '2023-01-15'
+  },
+  {
+    id: 'teacher-vikram-mehra',
+    name: 'Prof. Vikram Mehra',
+    email: 'vikram.mehra@tulas.edu.in',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+    university: "Tula's Institute",
+    universityId: 'tulas-inst',
+    department: 'Department of Computer Science',
+    designation: 'Associate Professor & Academic Mentor',
+    experienceYears: 9,
+    skills: ['Python', 'Machine Learning', 'SQL', 'Data Science', 'Database Systems', 'Java'],
+    expertise: ['Machine Learning', 'Data Analytics', 'Database Architecture'],
+    subjectsCanTeach: ['Python Programming', 'Machine Learning', 'SQL & Data Systems', 'Data Science'],
+    mentorshipTopics: ['Python Fundamentals', 'Hands-on ML Projects', 'Database Systems', 'Placement Preparation'],
+    officeHours: 'Tue & Fri 2:00 PM - 4:00 PM IST',
+    bio: 'Associate Professor passionate about bridge programs between undergraduate computer science curriculum and industry ML practice. Mentored over 350+ engineers.',
+    location: 'Dehradun, Uttarakhand',
+    verificationStatus: 'verified',
+    availableForMentorship: true,
+    registrationDate: '2023-04-10'
+  },
+  {
+    id: 'teacher-ananya-mukherjee',
+    name: 'Dr. Ananya Mukherjee',
+    email: 'ananya.m@geu.ac.in',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80',
+    university: 'Graphic Era University',
+    universityId: 'graphic-era',
+    department: 'School of Computing',
+    designation: 'Assistant Professor of AI & Data Science',
+    experienceYears: 6,
+    skills: ['Python', 'Natural Language Processing', 'Machine Learning', 'Data Science', 'PyTorch'],
+    expertise: ['Natural Language Processing', 'Data Science', 'Machine Learning'],
+    subjectsCanTeach: ['Natural Language Processing', 'Machine Learning', 'Python', 'Data Science'],
+    mentorshipTopics: ['NLP with Python', 'Machine Learning Research', 'Data Science Capstones'],
+    officeHours: 'Wed 11:00 AM - 1:00 PM IST',
+    bio: 'Assistant Professor specializing in NLP and conversational AI. Guides students on project building, research papers, and technical ML portfolios.',
+    location: 'Dehradun, Uttarakhand',
+    verificationStatus: 'verified',
+    availableForMentorship: true,
+    registrationDate: '2023-08-20'
+  }
+];
+
 export const CURRENT_STUDENT: StudentProfile = {
   id: 'student-current',
   name: "Student Member",
@@ -877,7 +944,21 @@ export const CURRENT_STUDENT: StudentProfile = {
     highlights: "Department Rank 3 · Core subjects: Data Structures, Operating Systems, Computer Networks"
   },
   skills: ["Data Structures", "Python", "React", "PostgreSQL", "Machine Learning", "Git", "Java", "Docker"],
+  studentSkills: [
+    { name: "Python", proficiency: "Advanced", category: "Programming" },
+    { name: "Machine Learning", proficiency: "Intermediate", category: "AI & Data" },
+    { name: "Data Structures", proficiency: "Advanced", category: "Core CS" },
+    { name: "React", proficiency: "Advanced", category: "Frontend" },
+    { name: "PostgreSQL", proficiency: "Intermediate", category: "Databases" },
+    { name: "Docker", proficiency: "Intermediate", category: "DevOps" },
+    { name: "Java", proficiency: "Intermediate", category: "Programming" },
+    { name: "Go", proficiency: "Beginner", category: "Backend" }
+  ],
   interests: ["Cloud Computing", "Product SDE Roles", "System Design", "Open Source", "AI Careers"],
+  learningGoals: ["Machine Learning", "Python", "Data Science"],
+  developmentGoals: "Master applied Machine Learning models, system design, and production deployment.",
+  experienceLevel: "Intermediate",
+  preferredMentorshipAreas: ["Machine Learning", "Python", "AI Project Architecture", "Career Planning"],
   lookingForGuidanceIn: [
     "Machine Learning",
     "Data Science",
@@ -886,9 +967,11 @@ export const CURRENT_STUDENT: StudentProfile = {
     "Internships",
     "Higher Studies"
   ],
-  careerGoals: "Aspiring Software Development Engineer aiming for Tier-1 product companies and cloud infrastructure teams.",
+  careerGoals: "Aspiring Machine Learning & Software Development Engineer aiming for Tier-1 product companies.",
+  resumeVisibility: "public",
+  mediaGallery: [],
   location: "Dehradun, Uttarakhand",
-  bio: "Pre-final year B.Tech CSE student. Passionate about full-stack web applications and scalable backend systems. Eager to connect with senior alumni and mentors across India.",
+  bio: "Pre-final year B.Tech CSE student. Passionate about full-stack web applications, AI integration, and scalable backend systems. Eager to connect with senior alumni and mentors across India.",
   internships: [
     {
       id: 'intern-1',
@@ -922,13 +1005,18 @@ export const CURRENT_STUDENT: StudentProfile = {
       name: 'AWS Certified Cloud Practitioner (CLF-C02)',
       issuingOrganization: 'Amazon Web Services',
       issueDate: 'Aug 2024',
-      credentialId: 'AWS-CCP-884920'
+      credentialId: 'AWS-CCP-884920',
+      credentialUrl: 'https://aws.amazon.com/verification',
+      certificateFileName: 'AWS_Cloud_Practitioner.pdf'
     },
     {
       id: 'cert-2',
       name: 'PostgreSQL Database Performance Mastery',
       issuingOrganization: 'Coursera & Stanford Online',
-      issueDate: 'Jan 2024'
+      issueDate: 'Jan 2024',
+      credentialId: 'STAN-DB-55219',
+      credentialUrl: 'https://coursera.org/verify/STAN-DB-55219',
+      certificateFileName: 'Stanford_PostgreSQL.pdf'
     }
   ],
   achievements: [
@@ -936,8 +1024,43 @@ export const CURRENT_STUDENT: StudentProfile = {
     "Lead Coordinator, Campus Coding Club",
     "500+ LeetCode problems solved with 1750+ Contest Rating"
   ],
-  profileCompletion: 90,
-  verificationStatus: 'verified'
+  studentAchievements: [
+    {
+      id: 'ach-s1',
+      title: 'Smart India Hackathon (SIH) Campus Round Winner',
+      description: 'Developed an automated grievance redressal workflow for higher education institutions using modern web technologies.',
+      organization: 'Ministry of Education & AICTE',
+      date: '2024',
+      mediaName: 'SIH_Certificate.png',
+      mediaUrl: 'https://images.unsplash.com/photo-1578269174936-2709b6aeb913?w=600&auto=format&fit=crop&q=80',
+      externalLink: 'https://sih.gov.in'
+    },
+    {
+      id: 'ach-s2',
+      title: 'Lead Coordinator, Campus Coding Club ByteForge',
+      description: 'Organized 12+ hackathons and algorithmic workshops for 400+ junior students with guest sessions from alumni.',
+      organization: "Tula's Institute",
+      date: '2025'
+    }
+  ],
+  resumeDoc: {
+    id: 'res-default',
+    fileName: 'Student_Engineering_Resume_2026.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    fileType: 'PDF',
+    fileSize: '412 KB',
+    lastUpdated: '12 Sep 2026',
+    externalLinks: {
+      googleDriveUrl: 'https://drive.google.com/file/d/sample-student-resume',
+      linkedInUrl: 'https://linkedin.com/in/student-member',
+      portfolioUrl: 'https://github.com/student-member'
+    }
+  },
+  profileCompletion: 85,
+  verificationStatus: 'verified',
+  isEmailVerified: true,
+  approvalStatus: 'approved',
+  registrationDate: '2026-08-14'
 };
 
 export const INITIAL_CONNECTIONS: ConnectionRequest[] = [
@@ -1290,7 +1413,10 @@ export const CAREER_OPPORTUNITIES: CareerOpportunity[] = [
     salaryOrStipend: "₹1,25,000 / month",
     deadline: "Oct 30, 2026",
     skillsRequired: ["Go", "C#", "Azure", "Distributed Systems", "Kubernetes"],
-    description: "Join Azure telemetry streaming infrastructure engineering team for a 6-month product engineering internship."
+    description: "Join Azure telemetry streaming infrastructure engineering team for a 6-month product engineering internship.",
+    status: 'approved',
+    aiMatchScore: 88,
+    aiMatchReasons: ["Azure Cloud interest aligns", "Distributed systems exposure", "Strong academic record"]
   },
   {
     id: 'opp-2',
@@ -1298,13 +1424,16 @@ export const CAREER_OPPORTUNITIES: CareerOpportunity[] = [
     company: "Razorpay",
     location: "Bengaluru, Karnataka",
     type: "Full-time",
-    postedBy: "Kunal Shah",
-    alumniId: "alumni-kunal-pm",
+    postedBy: "Sneha Rawat",
+    alumniId: "alumni-4",
     institution: "BITS Pilani",
     salaryOrStipend: "₹18 - ₹24 LPA",
     deadline: "Nov 15, 2026",
     skillsRequired: ["Product Strategy", "SQL", "User Analytics", "Wireframing"],
-    description: "Work directly with Razorpay payments leadership team to design seamless merchant checkout experiences."
+    description: "Work directly with Razorpay payments leadership team to design seamless merchant checkout experiences.",
+    status: 'approved',
+    aiMatchScore: 74,
+    aiMatchReasons: ["Analytical capability", "PostgreSQL understanding"]
   },
   {
     id: 'opp-3',
@@ -1318,7 +1447,195 @@ export const CAREER_OPPORTUNITIES: CareerOpportunity[] = [
     salaryOrStipend: "₹16 - ₹22 LPA",
     deadline: "Nov 01, 2026",
     skillsRequired: ["Go", "Kafka", "PostgreSQL", "Redis", "High-Concurrency"],
-    description: "Alumni referral opportunity for high-volume instant payments and delivery routing microservices."
+    description: "Alumni referral opportunity for high-volume instant payments and delivery routing microservices.",
+    status: 'approved',
+    aiMatchScore: 94,
+    aiMatchReasons: ["Direct Tula's Institute alumnus referral", "Go-cache project on resume", "PostgreSQL mastery"]
+  },
+  {
+    id: 'opp-4',
+    title: "Machine Learning Research Intern",
+    company: "Google",
+    location: "Hyderabad, Telangana",
+    type: "Internship",
+    postedBy: "Rohan Malhotra",
+    alumniId: "alumni-2",
+    institution: "IIT Roorkee",
+    salaryOrStipend: "₹1,40,000 / month",
+    deadline: "Dec 05, 2026",
+    skillsRequired: ["Python", "Machine Learning", "PyTorch", "Transformers", "NLP"],
+    description: "Collaborate with Google Indic language team on multilingual LLM fine-tuning, benchmark evals, and dataset synthesis.",
+    status: 'approved',
+    aiMatchScore: 92,
+    aiMatchReasons: ["Python proficiency matches", "Machine Learning course completion", "High interest in AI research"]
+  },
+  {
+    id: 'opp-5',
+    title: "Frontend Engineer (React / TypeScript)",
+    company: "Swiggy",
+    location: "Remote / Bengaluru",
+    type: "Full-time",
+    postedBy: "Sneha Rawat",
+    alumniId: "alumni-4",
+    institution: "Graphic Era University",
+    salaryOrStipend: "₹14 - ₹19 LPA",
+    deadline: "Nov 20, 2026",
+    skillsRequired: ["React", "TypeScript", "Tailwind CSS", "Redux", "Web Performance"],
+    description: "Build high-speed consumer storefront and food-discovery features servicing 15M+ daily orders.",
+    status: 'approved',
+    aiMatchScore: 96,
+    aiMatchReasons: ["React expertise proven", "TypeScript proficiency", "Frontend projects portfolio"]
+  },
+  {
+    id: 'opp-6',
+    title: "Data Science & GenAI Co-founder / Founding Engineer",
+    company: "NeuralCraft AI",
+    location: "Bengaluru, Karnataka",
+    type: "Startup",
+    postedBy: "Rohan Malhotra",
+    alumniId: "alumni-2",
+    institution: "IIT Roorkee",
+    salaryOrStipend: "Equity + ₹18 LPA",
+    deadline: "Dec 30, 2026",
+    skillsRequired: ["Python", "LLMs", "LangChain", "Vector DBs", "FastAPI"],
+    description: "Early-stage enterprise AI workflow copilot startup backed by institutional angel alumni.",
+    status: 'pending_review',
+    aiMatchScore: 82,
+    aiMatchReasons: ["Python & AI alignment", "Startup mindset"]
+  }
+];
+
+export const MOCK_PENDING_STUDENTS: StudentProfile[] = [
+  {
+    id: 'student-p1',
+    name: 'Aniket Deshmukh',
+    email: 'aniket.d@tulas.edu.in',
+    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80',
+    university: "Tula's Institute",
+    universityId: 'tulas-inst',
+    course: 'B.Tech Mechanical Engineering',
+    department: 'Mechanical Engineering',
+    graduationYear: 2027,
+    skills: ['AutoCAD', 'SolidWorks', 'Python', 'MATLAB'],
+    studentSkills: [
+      { name: 'AutoCAD', proficiency: 'Advanced' },
+      { name: 'Python', proficiency: 'Beginner' }
+    ],
+    interests: ['Robotics', 'EV Systems', 'Automation'],
+    lookingForGuidanceIn: ['Core Engineering Placements', 'Higher Studies (MS)'],
+    careerGoals: 'Looking to transition towards EV powertrain and automotive simulation engineering.',
+    location: 'Dehradun, Uttarakhand',
+    bio: '2nd year mechanical engineering student exploring robotics and EV tech.',
+    internships: [],
+    projects: [],
+    certifications: [],
+    achievements: [],
+    profileCompletion: 60,
+    verificationStatus: 'pending',
+    isEmailVerified: true,
+    approvalStatus: 'pending',
+    registrationDate: '2026-09-22'
+  },
+  {
+    id: 'student-p2',
+    name: 'Meera Nambiar',
+    email: 'meera.nambiar@geu.ac.in',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+    university: 'Graphic Era University',
+    universityId: 'graphic-era',
+    course: 'B.Tech Information Technology',
+    department: 'Information Technology',
+    graduationYear: 2026,
+    skills: ['Java', 'Spring Boot', 'SQL', 'Microservices'],
+    studentSkills: [
+      { name: 'Java', proficiency: 'Advanced' },
+      { name: 'Spring Boot', proficiency: 'Intermediate' }
+    ],
+    interests: ['FinTech', 'Cloud Architecture', 'Banking Software'],
+    lookingForGuidanceIn: ['Resume Review', 'Fintech Career Guidance'],
+    careerGoals: 'Aspiring Enterprise Backend Engineer.',
+    location: 'Dehradun, Uttarakhand',
+    bio: 'Pre-final year IT student focused on distributed backend architectures in Java.',
+    internships: [],
+    projects: [],
+    certifications: [],
+    achievements: [],
+    profileCompletion: 70,
+    verificationStatus: 'pending',
+    isEmailVerified: true,
+    approvalStatus: 'pending',
+    registrationDate: '2026-09-24'
+  }
+];
+
+export const MOCK_STARTUPS = [
+  {
+    id: 'startup-1',
+    name: 'IndicAI Technologies',
+    founderName: 'Rohan Malhotra',
+    founderId: 'alumni-2',
+    university: 'IIT Roorkee',
+    industry: 'Generative AI & NLP',
+    tagline: 'Vernacular AI assistants for Indian businesses & SMEs',
+    description: 'Building fine-tuned LLM agents capable of communicating fluently in 14 Indian regional languages.',
+    website: 'https://indicai.example.com',
+    stage: 'Seed' as const,
+    seeking: ['ML Interns', 'Frontend Developers', 'Early Beta Customers'],
+    status: 'approved' as const,
+    createdAt: '2026-08-15'
+  },
+  {
+    id: 'startup-2',
+    name: 'FleetOps Cloud',
+    founderName: 'Aditya Negi',
+    founderId: 'alumni-3',
+    university: "Tula's Institute",
+    industry: 'Logistics & Supply Chain',
+    tagline: 'Hyperlocal fleet routing & cold-chain telematics',
+    description: 'Real-time telemetry and battery health monitoring for last-mile electric two-wheelers in metro cities.',
+    website: 'https://fleetops.example.com',
+    stage: 'Early Stage' as const,
+    seeking: ['Go Backend Interns', 'IoT Firmware Engineers'],
+    status: 'approved' as const,
+    createdAt: '2026-09-02'
+  },
+  {
+    id: 'startup-3',
+    name: 'CampusEdutech Labs',
+    founderName: 'Ayush Sharma',
+    founderId: 'alumni-5',
+    university: 'Graphic Era University',
+    industry: 'EdTech & Placements',
+    tagline: 'AI mock interview simulation and automated resume scorecards',
+    description: 'Personalized interview rehearsal bot that asks company-specific behavioral and system design questions.',
+    website: 'https://campusedu.example.com',
+    stage: 'Idea' as const,
+    seeking: ['React Interns', 'Campus Ambassadors'],
+    status: 'pending_review' as const,
+    createdAt: '2026-09-23'
+  }
+];
+
+export const MOCK_FEEDBACK_REPORTS = [
+  {
+    id: 'fb-1',
+    submittedBy: 'Ayushi Arya',
+    userRole: 'student' as const,
+    category: 'Feature Request' as const,
+    subject: 'Add mock coding environment directly in chat',
+    message: 'It would be great if students and mentors could run Python code snippets inside the chat window during sessions.',
+    status: 'open' as const,
+    createdAt: '2026-09-20'
+  },
+  {
+    id: 'fb-2',
+    submittedBy: 'Priya Patel',
+    userRole: 'alumni' as const,
+    category: 'Platform Feedback' as const,
+    subject: 'Mentorship calendar syncing with Google Calendar',
+    message: 'The 1-on-1 booking requests work great! Would love automatic calendar event generation.',
+    status: 'investigating' as const,
+    createdAt: '2026-09-21'
   }
 ];
 

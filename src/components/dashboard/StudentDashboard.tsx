@@ -155,7 +155,7 @@ export const StudentDashboard: React.FC = () => {
         </div>
 
         {/* Welcome Section */}
-        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 dashboard-section">
           <div className="relative z-10 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-200 text-xs font-semibold mb-3 border border-blue-400/30">
               <Sparkles className="w-3.5 h-3.5 text-teal-400" />
@@ -220,7 +220,7 @@ export const StudentDashboard: React.FC = () => {
         </div>
 
         {/* Quick Actions (Explore Alumni, Find Mentor, Open Network, View Requests) */}
-        <div>
+        <div className="dashboard-section">
           <h2 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
             Quick Actions
           </h2>

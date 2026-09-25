@@ -49,6 +49,8 @@ export const FloatingNavPill: React.FC = () => {
               ? 'student-dashboard'
               : currentUser.role === 'alumni'
               ? 'alumni-dashboard'
+              : currentUser.role === 'teacher'
+              ? 'teacher-dashboard'
               : 'admin-dashboard',
           label: 'Dashboard',
           icon: <LayoutDashboard className="w-4 h-4 text-blue-600 dark:text-blue-400" />

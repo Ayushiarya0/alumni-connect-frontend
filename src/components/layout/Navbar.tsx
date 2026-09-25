@@ -258,7 +258,7 @@ export const Navbar: React.FC = () => {
                             </div>
                             <div className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded-full w-fit">
                               <CheckCircle2 className="w-3 h-3 text-teal-600 dark:text-teal-400" />
-                              Verified {currentUser.role === 'student' ? 'Student' : currentUser.role === 'alumni' ? 'Alumni' : 'Admin'}
+                              Verified {currentUser.role === 'student' ? 'Student' : currentUser.role === 'alumni' ? 'Alumni' : currentUser.role === 'teacher' ? 'Faculty' : 'Admin'}
                             </div>
                           </div>
                         </div>
@@ -267,6 +267,7 @@ export const Navbar: React.FC = () => {
                           onClick={() => {
                             if (currentUser.role === 'student') navigate('student-dashboard');
                             else if (currentUser.role === 'alumni') navigate('alumni-dashboard');
+                            else if (currentUser.role === 'teacher') navigate('teacher-dashboard');
                             else navigate('admin-dashboard');
                             setUserMenuOpen(false);
                           }}

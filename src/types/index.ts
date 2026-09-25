@@ -1,4 +1,4 @@
-export type UserRole = 'student' | 'alumni' | 'admin' | 'guest';
+export type UserRole = 'student' | 'alumni' | 'teacher' | 'admin' | 'guest';
 
 export type AppView =
   | 'landing'
@@ -7,11 +7,42 @@ export type AppView =
   | 'mentors'
   | 'student-dashboard'
   | 'alumni-dashboard'
+  | 'teacher-dashboard'
   | 'admin-dashboard'
   | 'my-profile'
   | 'chat'
   | 'about'
   | 'achievements';
+
+export interface ProfileMediaItem {
+  id: string;
+  url: string;
+  caption?: string;
+  type: 'image' | 'gif' | 'video';
+  uploadedAt: string;
+  isAnimated?: boolean;
+}
+
+export interface AIMentorMatch {
+  mentor: AlumniProfile | TeacherProfile;
+  mentorType: 'teacher' | 'alumni';
+  matchPercentage: number;
+  explanation: {
+    summary: string;
+    matchingSkills: string[];
+    missingSkills: string[];
+    sharedInterests: string[];
+    relevantExpertise: string[];
+    recommendationReason: string;
+    criteriaBreakdown: {
+      skillOverlap: number;
+      learningGoalAlignment: number;
+      interestAlignment: number;
+      mentorshipTopicAlignment: number;
+      experienceRelevance: number;
+    };
+  };
+}
 
 export type VerificationStatus =
   | 'verified'
@@ -21,6 +52,14 @@ export type VerificationStatus =
   | 'info_requested'
   | 'suspended';
 
+export type SkillProficiency = 'Beginner' | 'Intermediate' | 'Advanced';
+
+export interface StudentSkill {
+  name: string;
+  proficiency: SkillProficiency;
+  category?: string;
+}
+
 export interface University {
   id: string;
   name: string;
@@ -29,6 +68,9 @@ export interface University {
   city?: string;
   state: string;
   logo: string;
+  website?: string;
+  departments?: string[];
+  courses?: string[];
   verifiedDomains: string[];
   studentCount: number;
   alumniCount: number;
@@ -59,6 +101,74 @@ export interface Certification {
   issuingOrganization: string;
   issueDate: string;
   credentialId?: string;
+  credentialUrl?: string;
+  certificateFileUrl?: string;
+  certificateFileName?: string;
+}
+
+export interface StudentAchievement {
+  id: string;
+  title: string;
+  description: string;
+  organization: string;
+  date: string;
+  mediaUrl?: string;
+  mediaName?: string;
+  externalLink?: string;
+}
+
+export interface ResumeDocument {
+  id: string;
+  fileName: string;
+  fileUrl: string;
+  fileType: 'PDF' | 'DOC' | 'DOCX';
+  fileSize?: string;
+  lastUpdated: string;
+  externalLinks?: {
+    resumeUrl?: string;
+    googleDriveUrl?: string;
+    linkedInUrl?: string;
+    portfolioUrl?: string;
+  };
+}
+
+export interface AIResumeAnalysis {
+  targetRole: string;
+  currentMatchScore: number;
+  strengths: string[];
+  skillGaps: string[];
+  missingSkills: string[];
+  suggestedRoles: string[];
+  recommendedIndustries: string[];
+  recommendedActions: string[];
+}
+
+export interface AICareerRoadmapStep {
+  id: string;
+  stepNumber: number;
+  title: string;
+  phase:
+    | 'Current Skills'
+    | 'Missing Skills'
+    | 'Recommended Learning'
+    | 'Projects'
+    | 'Mentorship'
+    | 'Internship'
+    | 'Target Career';
+  description: string;
+  status: 'completed' | 'in_progress' | 'upcoming';
+  skillsToAcquire?: string[];
+  linkedAlumniIds?: string[];
+  linkedOpportunityIds?: string[];
+}
+
+export interface MatchScoreBreakdown {
+  overallMatch: number;
+  skillMatch: number;
+  careerMatch: number;
+  industryMatch: number;
+  experienceMatch: number;
+  whyReasons: string[];
 }
 
 export interface AlumniProfile {
@@ -94,7 +204,7 @@ export interface AlumniProfile {
   achievements: string[];
   availableForMentorship: boolean;
   mentorshipTopics: string[];
-  mentorshipCategories?: string[]; // e.g. "Career Guidance", "Technical Skills", "Higher Studies", "Placements", "Entrepreneurship"
+  mentorshipCategories?: string[];
   verificationStatus: VerificationStatus;
   submittedDocuments?: {
     type: string;
@@ -108,6 +218,42 @@ export interface AlumniProfile {
   reviewsCount: number;
   matchScore?: number;
   matchReason?: string;
+  matchBreakdown?: MatchScoreBreakdown;
+  registrationDate?: string;
+  subjectsCanTeach?: string[];
+  expertise?: string[];
+  developmentGoals?: string;
+  mediaGallery?: ProfileMediaItem[];
+  resumeDoc?: ResumeDocument;
+  resumeVisibility?: 'public' | 'private';
+}
+
+export interface TeacherProfile {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  university: string;
+  universityId: string;
+  department: string;
+  designation: string;
+  experienceYears: number;
+  skills: string[];
+  expertise: string[];
+  subjectsCanTeach: string[];
+  mentorshipTopics: string[];
+  officeHours?: string;
+  bio: string;
+  location: string;
+  verificationStatus: VerificationStatus;
+  resumeDoc?: ResumeDocument;
+  resumeVisibility?: 'public' | 'private';
+  mediaGallery?: ProfileMediaItem[];
+  availableForMentorship: boolean;
+  matchScore?: number;
+  matchReason?: string;
+  matchBreakdown?: MatchScoreBreakdown;
+  registrationDate?: string;
 }
 
 export interface StudentProfile {
@@ -125,7 +271,12 @@ export interface StudentProfile {
     highlights: string;
   };
   skills: string[];
+  studentSkills?: StudentSkill[];
   interests: string[];
+  learningGoals?: string[];
+  developmentGoals?: string;
+  experienceLevel?: 'Beginner' | 'Intermediate' | 'Advanced';
+  preferredMentorshipAreas?: string[];
   lookingForGuidanceIn?: string[];
   careerGoals: string;
   location: string;
@@ -134,8 +285,16 @@ export interface StudentProfile {
   projects: Project[];
   certifications: Certification[];
   achievements: string[];
+  studentAchievements?: StudentAchievement[];
+  resumeDoc?: ResumeDocument;
+  resumeVisibility?: 'public' | 'private';
+  mediaGallery?: ProfileMediaItem[];
   profileCompletion: number;
   verificationStatus: VerificationStatus;
+  isEmailVerified?: boolean;
+  approvalStatus?: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string;
+  registrationDate?: string;
 }
 
 export interface ConnectionRequest {
@@ -148,6 +307,13 @@ export interface ConnectionRequest {
   alumniName: string;
   alumniAvatar: string;
   alumniCompany: string;
+  targetId?: string;
+  targetName?: string;
+  targetAvatar?: string;
+  targetRole?: 'alumni' | 'teacher';
+  matchPercentage?: number;
+  matchedSkills?: string[];
+  matchReason?: string;
   status: 'pending' | 'accepted' | 'rejected' | 'blocked';
   note?: string;
   createdAt: string;
@@ -163,7 +329,7 @@ export interface MentorshipRequest {
   alumniName: string;
   alumniCompany: string;
   goal: string;
-  areaOfHelp: string; // e.g. "Resume Review", "Career Guidance", "Interview Preparation", "Technical Skills", etc.
+  areaOfHelp: string;
   message: string;
   status: 'pending' | 'accepted' | 'declined' | 'completed';
   scheduledDate?: string;
@@ -191,7 +357,9 @@ export interface NotificationItem {
     | 'mentorship_accepted'
     | 'new_message'
     | 'verification'
-    | 'announcement';
+    | 'announcement'
+    | 'approval'
+    | 'opportunity';
   title: string;
   message: string;
   content?: string;
@@ -205,10 +373,16 @@ export interface AdminAnalytics {
   totalAlumni: number;
   totalStudents: number;
   verifiedAlumni: number;
+  verifiedStudents?: number;
   pendingAlumni: number;
+  pendingStudents?: number;
   activeConnections: number;
   mentorshipSessions: number;
   pendingVerifications: number;
+  totalUniversities?: number;
+  totalJobs?: number;
+  totalInternships?: number;
+  totalEvents?: number;
   universityDistribution: { university: string; count: number }[];
   industryDistribution: { industry: string; percentage: number }[];
   monthlyGrowth: { month: string; students: number; alumni: number }[];
@@ -223,6 +397,9 @@ export interface UserSession {
   university: string;
   verificationStatus: VerificationStatus;
   isAuthenticated: boolean;
+  isEmailVerified?: boolean;
+  approvalStatus?: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string;
 }
 
 export type AchievementCategory =
@@ -263,6 +440,7 @@ export interface AlumniEvent {
   image: string;
   description: string;
   registrationOpen: boolean;
+  status?: 'approved' | 'pending_review' | 'rejected';
 }
 
 export interface CareerOpportunity {
@@ -270,7 +448,7 @@ export interface CareerOpportunity {
   title: string;
   company: string;
   location: string;
-  type: 'Full-time' | 'Internship' | 'Remote';
+  type: 'Full-time' | 'Internship' | 'Remote' | 'Project' | 'Freelance' | 'Startup';
   postedBy: string;
   alumniId: string;
   institution: string;
@@ -279,5 +457,37 @@ export interface CareerOpportunity {
   deadline: string;
   skillsRequired: string[];
   description: string;
+  status?: 'approved' | 'pending_review' | 'rejected';
+  aiMatchScore?: number;
+  aiMatchReasons?: string[];
+  applied?: boolean;
+  saved?: boolean;
+}
+
+export interface StartupListing {
+  id: string;
+  name: string;
+  founderName: string;
+  founderId: string;
+  university: string;
+  industry: string;
+  tagline: string;
+  description: string;
+  website?: string;
+  stage: 'Idea' | 'Early Stage' | 'Seed' | 'Growth' | 'Profitable';
+  seeking: string[]; // e.g. "Interns", "Co-founder", "Investors", "Mentors"
+  status: 'approved' | 'pending_review' | 'rejected';
+  createdAt: string;
+}
+
+export interface FeedbackReport {
+  id: string;
+  submittedBy: string;
+  userRole: UserRole;
+  category: 'Platform Feedback' | 'Bug Report' | 'Content Moderation' | 'Feature Request';
+  subject: string;
+  message: string;
+  status: 'open' | 'investigating' | 'resolved';
+  createdAt: string;
 }
 
