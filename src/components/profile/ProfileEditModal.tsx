@@ -34,9 +34,10 @@ interface ProfileEditData {
 
 interface ProfileEditModalProps {
   onClose: () => void;
+  initialTab?: 'profile' | 'media' | 'skills';
 }
 
-export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ onClose }) => {
+export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ onClose, initialTab = 'profile' }) => {
   const {
     currentUser,
     studentProfile,
@@ -60,7 +61,7 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ onClose }) =
 
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [activeTab, setActiveTab] = useState<'profile' | 'media' | 'skills'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'media' | 'skills'>(initialTab);
 
   // Avatar state
   const [avatarPreview, setAvatarPreview] = useState<string>(
